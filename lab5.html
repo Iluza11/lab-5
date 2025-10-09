@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пример моего сайта</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background-color: #F4F6FF;
+            color: #333;
+            padding: 1.5rem 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .user-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .photo-container {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 2px solid #7782AD;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7782AD;
+            font-size: 0.8rem;
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #08123A;
+        }
+
+        .user-title {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-top: 0.2rem;
+        }
+
+        .register-btn {
+            background-color: #7782AD;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .register-btn:hover {
+            background-color: #08123A;
+            box-shadow: 0 4px 8px rgba(37, 132, 195, 0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            justify-content: center;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #104bfb;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+        }
+
+        .sidebar {
+            width: 260px;
+            background-color: #08123A;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+            padding: 1.5rem 0;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            position: relative;
+        }
+
+        .sidebar-nav a {
+            color: #b0b0b0;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.9rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .sidebar-icon {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-nav a:hover .sidebar-icon {
+            transform: scale(1.1);
+        }
+
+        .sidebar-text {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .content-title {
+            font-size: 2rem;
+            color: #1a237e;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-text {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .footer {
+            background-color: #7782AD;
+            color: white;
+            padding: 2.5rem 2rem 1.5rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .footer-left {
+            flex: 1;
+        }
+
+        .footer-student {
+            margin-bottom: 1.5rem;
+        }
+
+        .student-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .student-title {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 0.9rem;
+        }
+
+        .contact-icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        .footer-right {
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .contact-form-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-input {
+            padding: 0.8rem;
+            border: none;
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            background-color: white;
+        }
+
+        .form-btn {
+            background-color: #08123A;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-btn:hover {
+            background-color: #0a1a4d;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.2);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            padding-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-link:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-top">
+            <div class="user-container">
+                <div class="photo-container">
+                    <div class="photo-placeholder"><img src="img/foto.png" style="width: 60px; height: 60px;"></div>
+                </div>
+                <div class="user-info">
+                    <div class="user-name">Насрутдинова Илюза Айратовна</div>
+                    <div class="user-title">ПГТУ, студент, ИСТ-38</div>
+                </div>
+            </div>
+            <nav>
+            <ul class="nav-links">
+                <li><a href="#">Дом</a></li>
+                <li><a href="#">Команда</a></li>
+                <li><a href="#">Особенность</a></li>
+                <li><a href="#">Блог</a></li>
+                <li><a href="#">Контакты</a></li>
+            </ul>
+        </nav>
+            <button class="register-btn">Зарегистрироваться</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="sidebar">
+            <ul class="sidebar-nav">
+                <li>
+                    <a href="#">
+                        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 20H14V14H20V10H14V4H10V10H4V14H10V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="sidebar-text">Панель инструментов</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 16V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 8H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="sidebar-text">Понимание</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="sidebar-text">Люди и термины</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="sidebar-text">Продукт</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="sidebar-text">Входящие</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 11L12 14L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M21 12V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="sidebar-text">Возвраты</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="sidebar-text">Профиль</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <h2 class="content-title">Основные сведения о ПГТУ.</h2>
+            <p class="content-text"><strong>Ректор университета</strong> — доктор технических наук, профессор <strong>Петухов Игорь Валерьевич.</strong></p>
+            <p class="content-text"><strong>Полное наименование:</strong> Федеральное государственное бюджетное образовательное учреждение высшего образования «Поволжский государственный технологический университет».</p>
+            <p class="content-text"><strong>Сокращенное наименование:</strong> Поволжский государственный технологический университет, ФГБОУ ВО «ПГТУ», Волгатех.</p>
+            <p class="content-text"><strong>Полное наименование на английском языке:</strong> Federal State Budgetary Educational Institution of Higher Education «Volga State University of Technology».</p>
+            <p class="content-text"><strong>Сокращенные наименования на английском языке: </strong> State University of Technology, VSUT, Volgatech.</p>
+            <p class="content-text"><strong>Дата образования:</strong> 5 июня 1932 года</p>
+        
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="footer-student">
+                    <div class="student-name">Насрутдинова И. А.</div>
+                    <div class="student-title">студент</div>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 16.92V19.92C22 20.52 21.53 21 20.93 21C11.18 21 3 12.82 3 3.07C3 2.47 3.48 2 4.08 2H7.08C7.63 2 8.08 2.45 8.08 3C8.08 4.92 8.53 6.75 9.38 8.38C9.58 8.78 9.48 9.27 9.13 9.55L7.49 10.88C9.06 13.62 11.38 15.94 14.12 17.51L15.45 15.87C15.73 15.52 16.22 15.42 16.62 15.62C18.25 16.47 20.08 16.92 22 16.92Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>+7 (8362) 45-53-44</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M22 6L12 13L2 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>info@volgatech.net.</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>г. Йошкар-Ола, пл. Ленина, д. 3</span>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="contact-form-title">Связаться с нами</div>
+                <form class="contact-form">
+                    <input type="text" class="form-input" placeholder="Имя" required>
+                    <input type="email" class="form-input" placeholder="Почта" required>
+                    <textarea class="form-input" placeholder="Сообщение" rows="4" required></textarea>
+                    <button type="submit" class="form-btn">Отправить на рассмотрение</button>
+                </form>
+            </div>
+        </div>
+        <div class="social-links">
+            <svg class="social-icon" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 2H15C13.6739 2 12.4021 2.52678 11.4645 3.46447C10.5268 4.40215 10 5.67392 10 7V10H7V14H10V22H14V14H17L18 10H14V7C14 6.73478 14.1054 6.48043 14.2929 6.29289C14.4804 6.10536 14.7348 6 15 6H18V2Z"/>
+            </svg>
+            <svg class="social-icon" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23 3.00005C22.0424 3.67552 20.9821 4.19216 19.86 4.53005C19.2577 3.83756 18.4573 3.34674 17.567 3.12397C16.6767 2.90121 15.7395 2.95724 14.8821 3.2845C14.0247 3.61176 13.2884 4.19445 12.773 4.95376C12.2575 5.71308 11.9877 6.61238 12 7.53005V8.53005C10.2426 8.57561 8.50127 8.18586 6.93101 7.39549C5.36074 6.60512 4.01032 5.43868 3 4.00005C3 4.00005 -1 13 8 17C5.94053 18.398 3.48716 19.099 1 19C10 24 21 19 21 7.50005C20.9991 7.2215 20.9723 6.94364 20.92 6.67005C21.9406 5.66354 22.6608 4.39276 23 3.00005Z"/>
+            </svg>
+            <svg class="social-icon" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.477 2 2 6.477 2 12C2 16.991 5.657 21.128 10.438 21.879V14.89H7.898V12H10.438V9.797C10.438 7.291 11.93 5.907 14.215 5.907C15.309 5.907 16.453 6.102 16.453 6.102V8.562H15.193C13.95 8.562 13.563 9.333 13.563 10.124V12H16.336L15.893 14.89H13.563V21.879C18.343 21.129 22 16.99 22 12C22 6.477 17.523 2 12 2Z"/>
+            </svg>
+        </div>
+        <div class="footer-bottom">
+            <a href="#" class="footer-link">Условия обслуживания</a>
+            <a href="#" class="footer-link">Политика конфиденциальности</a>
+            <a href="#" class="footer-link">Безопасность</a>
+        </div>
+    </footer>
+</body>
+</html>
